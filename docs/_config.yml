@@ -11,14 +11,14 @@ minimal_mistakes_skin    : "dark" # "air", "aqua", "contrast", "dark", "dirt", "
 
 # Site Settings
 locale                   : "en-US"
-title                    : "협곡"
+title                    : ""
 title_separator          : "-"
 subtitle                 : "A Jekyll theme"
 name                     : &name "Hwijun Kwon" # &name is a YAML anchor which can be *referenced later
 description              : &description "통계 애호가의 블로그"
 url                      : https://kwonhwijun.github.io # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
-baseurl                  : "/khjstat" # the subpath of your site, e.g. "/blog"
-repository               : "khj/stats"
+baseurl                  : "" # the subpath of your site, e.g. "/blog"
+repository               : ""
 teaser                   : "/assets/images/s_ring" # path of fallback teaser image, e.g. "/assets/images/500x300.png"
 logo                     : "/assets/images/logo2" # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 masthead_title           : "마스터타이틀" # overrides the website title displayed in the masthead, use " " for no title
