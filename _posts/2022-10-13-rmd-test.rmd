@@ -1,0 +1,9 @@
+---
+title: RMD TEST
+date : 22-10-13
+
+---
+HI This is test page for RMD
+```{r}
+rep(c("red", "blue"), times=c(2,10))
+```
