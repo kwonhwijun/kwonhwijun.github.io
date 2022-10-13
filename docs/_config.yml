@@ -101,18 +101,18 @@ author:
   bio              : "Just another *boring*, *tattooed*, *time traveling*, *designer*."
   location         : "Buffalo, NY"
   links:
-    - label: "Made Mistakes"
-      icon: "fas fa-fw fa-link"
-      url: "https://mademistakes.com"
+    - label: ""
+      icon: ""
+      url: ""
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: "https://twitter.com/mmistakes"
+      url: ""
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/mmistakes"
+      url: ""
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
-      url: "https://instagram.com/mmistakes"
+      url: ""
 
 
 # Site Footer
