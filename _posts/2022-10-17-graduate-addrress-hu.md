@@ -1,7 +1,8 @@
 ---
 Title : 허준이 교수의 졸업 연설
 Date : 2022-10-17
-Categories : 기억하고 싶은 글
+Categories : 
+    - 글
 ---
 
 {% include video id="OLDhaqosPtA" provider="youtube" %}
