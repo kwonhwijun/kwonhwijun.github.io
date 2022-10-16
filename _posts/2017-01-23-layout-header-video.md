@@ -25,9 +25,9 @@ This post should display a **header with a responsive video**, if the theme supp
 
 To embed the following YouTube video at url `https://www.youtube.com/watch?v=-PVofD2A9t8` (long version) or `https://youtu.be/-PVofD2A9t8` (short version) into a post or page's main content you'd use: 
 
-```liquid
+
 {% raw %}{% include video id="-PVofD2A9t8" provider="youtube" %}{% endraw %}
-```
+
 
 {% include video id="-PVofD2A9t8" provider="youtube" %}
 
