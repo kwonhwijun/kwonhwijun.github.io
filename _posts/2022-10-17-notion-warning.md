@@ -1,7 +1,7 @@
 ---
-Title : Github Warning 
-Date : 2022-10-17
-Categories : 
+title : Github Debugging
+date : 2022-10-17
+categories : 
     - Github 
 ---
 
