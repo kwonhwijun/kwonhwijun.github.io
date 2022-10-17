@@ -12,7 +12,7 @@ future : true
 
 ### 유튜브 영상 첨부하기
 1. 그냥 본문에 첨부하기
-```
+``` yaml
 {% include video id="-PVofD2A9t8" provider="youtube" %}
 ```
 
