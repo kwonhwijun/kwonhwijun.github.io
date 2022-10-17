@@ -12,6 +12,11 @@ future : true
 ```
 
 ### 코드 블록 생성하기
+1. 문자 그대로 첨부하기 
+```yaml
+{% raw %}{% include video id="-PVofD2A9t8" provider="youtube" %}{% endraw %}
+```
+2. 코딩 블록을 만들기
 ```yaml
     ```{원하는 언어}
     Code 1
@@ -19,18 +24,15 @@ future : true
     ```
 ```
 
-2. 연구중
+3. 연구중
 
 This post lives in the future and is dated {{ page.date | date: "%c" }}. When building Jekyll with the `--future` flag it should appear.
 
-3. {% raw %}{% include video id="-PVofD2A9t8" provider="youtube" %}{% endraw %}
-이렇게 앞뒤로 raw를 붙여주면, 코드를 그 자체로 넣을 수 있다.
 
 ### 유튜브 영상 첨부하기
 1. 그냥 본문에 첨부하기
-``` yaml
-{% include video id="-PVofD2A9t8" provider="youtube" %}
-```
+{% raw %}{% include video id="-PVofD2A9t8" provider="youtube" %}{% endraw %}
+코드를 넣고, id만 바꿔주면 된다.
 
 2. Header로 첨부하기
 Header에 다음 속성을 추가해주고
