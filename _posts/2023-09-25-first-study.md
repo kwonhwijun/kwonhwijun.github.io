@@ -8,7 +8,7 @@ categories :
 # 네이버 웹툰 크롤링하기
 
 ### 다운로드 함수 불러오기
-```{python}
+```python
 from requests import request
 from requests.exceptions import HTTPError
 from time import sleep
