@@ -8,12 +8,10 @@ main:
     url: /categories/
   - title: "Tags"
     url: /tags/
-  - title: "Pages"
-    url: /page-archive/
   - title: "Collections"
     url: /collection-archive/
-  - title: "External Link"
-    url: https://google.com
+  - title: "통계학"
+    url: /statistics/
 
 
 test:
