@@ -93,7 +93,7 @@ analytics:
 # Site Author
 author:
   name             : "Hwijun kwon"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
+  avatar           : "assets/avatar.jpg"
   bio              : "통계애호가"
   location         : "Seoul, Korea"
   email            :
