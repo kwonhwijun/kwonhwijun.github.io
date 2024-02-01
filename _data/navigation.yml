@@ -14,3 +14,10 @@ main:
     url: /collection-archive/
   - title: "External Link"
     url: https://google.com
+
+
+test:
+  - title: "About"
+    url: /about/
+  - title : "Posts"
+    url : /year-archive/
