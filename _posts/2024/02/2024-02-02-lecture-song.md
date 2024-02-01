@@ -15,4 +15,5 @@ date : 2024-02-02
 
 
 
-{% raw %}{% include video id="uh3C4NRy1Bc" provider="youtube" %}{% endraw %}
+{% include video id="uh3C4NRy1Bc" provider="youtube" %}
+
