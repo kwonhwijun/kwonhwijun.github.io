@@ -37,7 +37,7 @@ stats:
       - title : 최강력 검정
         url : /math-stat/최강력검정/
       - title : 일반화 가능도비 검정
-        url : /math-stat/일반화가능도비/
+        url : /math-stat/일반화가능도/
   - title : "다른 통계"
     children :
       - title : 일변수 회귀분석
