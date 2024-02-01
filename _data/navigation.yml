@@ -27,3 +27,14 @@ stats:
         url : /stats/math-stat/
       - title : 회귀분석
         url : /stats/regression/
+
+
+# 이미지, 텍스트도 첨부 가능하다.
+# sidebar:
+#  - title: "Title"
+#    image: "/assets/images/your-image.jpg"
+#    image_alt: "image"
+#    text: "Some text here."
+#  - title: "Another Title"
+#    text: "More text here."
+#    nav: sidebar-sample
