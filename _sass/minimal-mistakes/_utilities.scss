@@ -567,7 +567,7 @@ a.reversefootnote {
 
 .responsive-video-container {
   position: relative;
-  margin-bottom: 1em;
+  margin-bottom: 1em auto;
   padding-bottom: 28.125%;
   height: 0;
   overflow: hidden;
@@ -579,8 +579,9 @@ a.reversefootnote {
     position: absolute;
     top: 0;
     left: 0;
-    width: 50%;
-    height: 50%;
+    width: 75%;
+    height: 75%;
+    margin : auto ;
   }
 }
 
