@@ -1,8 +1,8 @@
 ---
-title: statistics
-layout: category
-permalink: /stats/regression/
+title: Regression
+layout: tag
+permalink: /regression/
 taxonomy: regression
 ---
 
-regression category
+회귀분석 테스트

@@ -41,6 +41,7 @@ stats:
   - title : "다른 통계"
     children :
       - title : 일변수 회귀분석
+        url : /regression/
 
 
 # 이미지, 텍스트도 첨부 가능하다.
