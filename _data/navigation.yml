@@ -21,12 +21,15 @@ test:
     url : /year-archive/
 
 stats:
-  - title : "통계학"
+  - title : "수리통계학"
     children : 
-      - title : 수리통계학
-        url : /stats/math-stat/
+      - title : 포아송분포
+        url : /stats/포아송분포
       - title : 회귀분석
         url : /stats/regression/
+  - title : "회귀분석"
+    children :
+      - title : 일변수 회귀분석
 
 
 # 이미지, 텍스트도 첨부 가능하다.
