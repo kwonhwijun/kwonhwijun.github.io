@@ -19,3 +19,11 @@ test:
     url: /about/
   - title : "Posts"
     url : /year-archive/
+
+stats:
+  - title : "통계학"
+    children : 
+      - title : 수리통계학
+        url : /stats/math-stat/
+      - title : 회귀분석
+        url : /stats/regression/
