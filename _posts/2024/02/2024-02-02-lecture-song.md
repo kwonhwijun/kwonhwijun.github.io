@@ -17,3 +17,4 @@ date : 2024-02-02
 
 {% include video id="uh3C4NRy1Bc" provider="youtube" %}
 
+{% include video id="VYOjWnS4cMY" provider="youtube" %}
