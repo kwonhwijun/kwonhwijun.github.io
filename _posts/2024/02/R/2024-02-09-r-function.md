@@ -1,9 +1,9 @@
 ---
-title : 최대가능도 추정
+title : R 함수 정리
 category : 
-    - math-stat
+    - R
 tag : 
-    - [수리통계학, 최대가능도, 추정]
+    - [R, 최대가능도, 추정]
 sidebar :
     nav : stats
 
@@ -13,7 +13,7 @@ toc_sticky : true
 date : 2024-02-09
 ---
 
-###
+#### require
 
 ```r
 if(!require(ggplot2)){
