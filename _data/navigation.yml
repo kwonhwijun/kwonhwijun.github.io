@@ -44,6 +44,18 @@ stats:
         url : /regression/
 
 
+bayes:
+  - title : "베이지안 추론"
+  - title : '베이지안 네트워크'
+    url : /bayes/베이지안네트워크/
+  - title : "베이지안 프로그래밍"
+    children :
+      - title : BUGS
+        url : /bayes/bugs/
+      - title : JAGS
+        url : /bayes/jags/
+
+
 # 이미지, 텍스트도 첨부 가능하다.
 # sidebar:
 #  - title: "Title"
