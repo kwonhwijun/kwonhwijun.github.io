@@ -1,5 +1,5 @@
 ---
-title : 포아송 분포
+title : 통계대학원 2학기
 
 categories : 
     - Blog
