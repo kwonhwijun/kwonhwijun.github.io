@@ -11,7 +11,9 @@ main:
   - title: "Portfolio"
     url: /portfolio/
   - title: "통계학"
-    url: /statistics/
+    url: /categories/statistics/
+  - title: "인과추론"
+    url: /categories/causal/
 
 
 test:
