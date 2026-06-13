@@ -4,12 +4,12 @@ minimal_mistakes_skin    : "air" # "air", "aqua", "contrast", "dark", "dirt", "n
 
 # Site Settings
 locale                   : "en-US"
-title                    : "난수의 통계적 데이터 과학"
+title                    : "난수의 데이터로그"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Hwijun Kwon"
-description              : "통계애호가의 블로그입니다"
-url                      :  # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
+description              : "통계·인과추론으로 데이터를 읽고, 일하며 배운 것을 기록합니다"
+url                      : "https://kwonhwijun.github.io" # the base hostname & protocol for your site
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : "kwonhwijun/kwonhwijun.github.io"
 teaser                   :  # path of fallback teaser image, e.g. "/assets/images/500x300.png"
@@ -280,4 +280,19 @@ defaults:
       related: true
       show_date : true
       sidebar_main: true
-future : true 
+future : true
+  # _portfolio
+  - scope:
+      path: ""
+      type: portfolio
+    values:
+      layout: single
+      author_profile: true
+      share: true
+
+
+# Collections
+collections:
+  portfolio:
+    output: true
+    permalink: /:collection/:path/

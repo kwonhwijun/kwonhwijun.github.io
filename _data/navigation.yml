@@ -8,8 +8,8 @@ main:
     url: /categories/
   - title: "Tags"
     url: /tags/
-  - title: "Collections"
-    url: /collection-archive/
+  - title: "Portfolio"
+    url: /portfolio/
   - title: "통계학"
     url: /statistics/
 
