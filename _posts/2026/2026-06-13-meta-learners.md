@@ -1,4 +1,5 @@
 ---
+published: false  # 아직 발행 안 함 — 발행하려면 이 줄을 지우거나 true로
 title: "메타러너(Meta-Learners)로 이질적 처치효과 추정하기"
 date: 2026-06-13
 categories:
