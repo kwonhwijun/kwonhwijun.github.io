@@ -288,6 +288,15 @@ defaults:
       layout: single
       author_profile: true
       share: true
+  # _reviews
+  - scope:
+      path: ""
+      type: reviews
+    values:
+      layout: single
+      author_profile: true
+      share: true
+      read_time: true
 future : true
 
 
@@ -296,3 +305,6 @@ collections:
   portfolio:
     output: true
     permalink: /:collection/:path/
+  reviews:
+    output: true
+    permalink: /review/:path/

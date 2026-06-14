@@ -2,18 +2,14 @@
 main:
   - title: "About"
     url: /about/
-  - title: "Posts"
-    url: /year-archive/
-  - title: "Categories"
-    url: /categories/
-  - title: "Tags"
-    url: /tags/
+  - title: "Review"
+    url: /review/
+  - title: "Career"
+    url: /career/
+  - title: "Knowledge"
+    url: /knowledge/
   - title: "Portfolio"
     url: /portfolio/
-  - title: "통계학"
-    url: /categories/statistics/
-  - title: "인과추론"
-    url: /categories/causal/
 
 
 test:
