@@ -1,4 +1,5 @@
 ---
+published: false  # 블로그 셋업/메타 — 비공개
 title : 글 쓰기 테스트
 date : 2023-04-21
 categories : 

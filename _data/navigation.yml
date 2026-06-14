@@ -12,6 +12,20 @@ main:
     url: /portfolio/
 
 
+# Knowledge 섹션 사이드바 (좌측 목록)
+knowledge:
+  - title: "전문지식"
+    children:
+      - title: "통계학"
+        url: /categories/statistics/
+      - title: "인과추론"
+        url: /categories/causal/
+      - title: "dbt"
+        url: /categories/dbt/
+      - title: "AI"
+        url: /categories/ai/
+
+
 test:
   - title: "About"
     url: /about/

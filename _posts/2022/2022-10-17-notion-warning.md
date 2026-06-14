@@ -1,4 +1,5 @@
 ---
+published: false  # 블로그 셋업/메타 — 비공개
 title : Github Debugging
 date : 2022-10-17
 categories : 

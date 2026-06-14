@@ -1,4 +1,5 @@
 ---
+published: false  # 블로그 셋업/메타 — 비공개
 title : "Github 블로그 기록"
 tate : 2022-10-17
 categories : 
