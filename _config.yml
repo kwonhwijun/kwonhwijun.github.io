@@ -280,7 +280,6 @@ defaults:
       related: true
       show_date : true
       sidebar_main: true
-future : true
   # _portfolio
   - scope:
       path: ""
@@ -289,6 +288,7 @@ future : true
       layout: single
       author_profile: true
       share: true
+future : true
 
 
 # Collections
