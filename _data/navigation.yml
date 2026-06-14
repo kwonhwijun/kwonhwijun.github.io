@@ -20,8 +20,10 @@ knowledge:
         url: /categories/statistics/
       - title: "인과추론"
         url: /categories/causal/
-      - title: "dbt"
-        url: /categories/dbt/
+      - title: "프로덕트 분석"
+        url: /categories/product/
+      - title: "데이터 도구"
+        url: /categories/tools/
       - title: "AI"
         url: /categories/ai/
 
