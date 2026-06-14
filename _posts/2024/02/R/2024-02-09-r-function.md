@@ -1,11 +1,9 @@
 ---
 title : R 함수 정리
-category : 
-    - R
-tag : 
-    - [R, 최대가능도, 추정]
-sidebar :
-    nav : stats
+categories: [statistics]
+tags: [R]
+sidebar:
+  nav: "knowledge"
 
 author_profile : true
 toc : true

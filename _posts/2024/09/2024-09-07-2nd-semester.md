@@ -1,12 +1,8 @@
 ---
 title : 통계대학원 2학기
 
-categories : 
-    - Blog
-tags:
-    - [통계대학원]
-sidebar :
-    nav : "stats"
+categories: [career]
+tags: [대학원]
 toc : true
 toc_sticky : true
 

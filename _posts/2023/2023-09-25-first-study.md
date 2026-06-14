@@ -1,4 +1,5 @@
 ---
+published: false  # 스텁/미완성 — 비공개
 title : 복습을 도전해보자
 date : 2023-09-25
 categories : 

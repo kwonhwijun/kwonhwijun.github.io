@@ -1,4 +1,5 @@
 ---
+published: false  # 스텁/미완성 — 비공개
 title : 베이지안 프로그래밍
 categories :
     - Blog

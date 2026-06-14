@@ -1,4 +1,5 @@
 ---
+published: false  # 스텁/미완성 — 비공개
 title : 정규분포 A to Z
 categories : 
   - bayes
