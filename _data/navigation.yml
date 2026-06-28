@@ -14,18 +14,24 @@ main:
 
 # Knowledge 섹션 사이드바 (좌측 목록)
 knowledge:
-  - title: "전문지식"
+  - title: "통계"
     children:
+      - title: "수리통계"
+        url: /categories/mathstat/
+      - title: "임상통계"
+        url: /categories/clinical/
       - title: "통계학"
         url: /categories/statistics/
-      - title: "인과추론"
-        url: /categories/causal/
-      - title: "프로덕트 분석"
-        url: /categories/product/
-      - title: "데이터 도구"
-        url: /categories/tools/
-      - title: "AI"
-        url: /categories/ai/
+  - title: "인과추론"
+    url: /categories/causal/
+  - title: "바이오"
+    url: /categories/bio/
+  - title: "프로덕트 분석"
+    url: /categories/product/
+  - title: "데이터 도구"
+    url: /categories/tools/
+  - title: "AI"
+    url: /categories/ai/
 
 
 test:

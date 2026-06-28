@@ -27,3 +27,6 @@ codekit-config.json
 .sass-cache
 _asset_bundler_cache
 _site
+
+# Voice corpus — 말투 학습용 옛 글 (로컬 비공개, 발행 안 함)
+_voice/

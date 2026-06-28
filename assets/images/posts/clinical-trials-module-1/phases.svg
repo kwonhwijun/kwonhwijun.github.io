@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 250" font-family="'Apple SD Gothic Neo','Malgun Gothic','Helvetica Neue',Arial,sans-serif">
+  <rect width="720" height="250" fill="#ffffff"/>
+  <text x="360" y="30" text-anchor="middle" font-size="15" fill="#666">질문이 안전성에서 효과로 옮겨갈수록 표본이 커진다</text>
+  <defs>
+    <marker id="ah" markerWidth="10" markerHeight="10" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L6,3 L0,6 Z" fill="#bbb"/>
+    </marker>
+  </defs>
+  <line x1="70" y1="50" x2="650" y2="50" stroke="#cccccc" stroke-width="2" marker-end="url(#ah)"/>
+
+  <rect x="70" y="150" width="150" height="60" rx="8" fill="#eef3fc" stroke="#2d6cdf" stroke-width="1.5"/>
+  <text x="145" y="178" text-anchor="middle" font-size="16" font-weight="bold" fill="#2d6cdf">Phase I</text>
+  <text x="145" y="198" text-anchor="middle" font-size="12.5" fill="#444">10–30명 · 안전·용량</text>
+
+  <rect x="285" y="120" width="150" height="90" rx="8" fill="#e3ecfb" stroke="#2d6cdf" stroke-width="1.5"/>
+  <text x="360" y="152" text-anchor="middle" font-size="16" font-weight="bold" fill="#2d6cdf">Phase II</text>
+  <text x="360" y="172" text-anchor="middle" font-size="12.5" fill="#444">30–100명 · 예비 효과</text>
+
+  <rect x="500" y="80" width="150" height="130" rx="8" fill="#d6e2f9" stroke="#2d6cdf" stroke-width="1.5"/>
+  <text x="575" y="118" text-anchor="middle" font-size="16" font-weight="bold" fill="#2d6cdf">Phase III</text>
+  <text x="575" y="138" text-anchor="middle" font-size="12.5" fill="#444">100명+ · 대조·무작위</text>
+</svg>
