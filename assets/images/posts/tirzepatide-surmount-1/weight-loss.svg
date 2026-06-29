@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" font-family="'Apple SD Gothic Neo','Malgun Gothic','Helvetica Neue',Arial,sans-serif">
+  <rect width="640" height="360" fill="#ffffff"/>
+  <text x="320" y="34" text-anchor="middle" font-size="16" font-weight="bold" fill="#333">SURMOUNT-1 — 72주 평균 체중 감소율</text>
+
+  <!-- baseline -->
+  <line x1="50" y1="290" x2="600" y2="290" stroke="#ccc" stroke-width="1.5"/>
+
+  <!-- 위약 3.1% -> h34, top 256 -->
+  <rect x="70" y="256" width="90" height="34" rx="3" fill="#b0b0b0"/>
+  <text x="115" y="248" text-anchor="middle" font-size="14" font-weight="bold" fill="#666">−3.1%</text>
+  <text x="115" y="312" text-anchor="middle" font-size="13" fill="#444">위약</text>
+
+  <!-- 5mg 15.0 -> h165, top 125 -->
+  <rect x="200" y="125" width="90" height="165" rx="3" fill="#9db8e8"/>
+  <text x="245" y="117" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d6cdf">−15.0%</text>
+  <text x="245" y="312" text-anchor="middle" font-size="13" fill="#444">5 mg</text>
+
+  <!-- 10mg 19.5 -> h214, top 76 -->
+  <rect x="330" y="76" width="90" height="214" rx="3" fill="#5b86d6"/>
+  <text x="375" y="68" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d6cdf">−19.5%</text>
+  <text x="375" y="312" text-anchor="middle" font-size="13" fill="#444">10 mg</text>
+
+  <!-- 15mg 20.9 -> h230, top 60 -->
+  <rect x="460" y="60" width="90" height="230" rx="3" fill="#2d6cdf"/>
+  <text x="505" y="52" text-anchor="middle" font-size="14" font-weight="bold" fill="#2d6cdf">−20.9%</text>
+  <text x="505" y="312" text-anchor="middle" font-size="13" fill="#444">15 mg</text>
+
+  <text x="320" y="345" text-anchor="middle" font-size="11.5" fill="#999">tirzepatide 용량 (주 1회 피하주사) · n=2,539 · Jastreboff et al., NEJM 2022</text>
+</svg>
