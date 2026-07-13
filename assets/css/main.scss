@@ -6,4 +6,226 @@ search : false
 
 @import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}"; // skin
 @import "minimal-mistakes"; // main partials
-@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap')
+
+/* ==========================================================================
+   난수의 데이터로그 — 커스텀 레이어
+   1층(홈 히어로)은 시끄럽게, 2층(본문)은 조용하게.
+   본문 수치는 think-note 실측값: 18px / 36px / -0.3px / 700px.
+   ========================================================================== */
+
+$ink: #14171c;
+$hero-bg: #0e0f11;
+$hero-dot: #e7e8e4;
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── 2층: 독서 레이어 ───────────────────────────────────────── */
+
+// 읽는 페이지에만 measure를 건다 (포트폴리오·리뷰 그리드는 그대로 둔다)
+.layout--single .page__content,
+.layout--home .page__content {
+  max-width: 44rem;
+}
+
+.page__content {
+  p,
+  li {
+    font-size: 18px;
+    line-height: 36px;
+    letter-spacing: -0.3px;
+    color: $ink;
+  }
+
+  p {
+    margin: 0 0 30px;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    letter-spacing: -0.03em;
+  }
+
+  h2 {
+    line-height: 1.35;
+  }
+
+  h3 {
+    line-height: 1.45;
+  }
+}
+
+.page__title,
+.archive__item-title {
+  letter-spacing: -0.04em;
+  line-height: 1.28;
+}
+
+/* ── 1층: 홈 히어로 ─────────────────────────────────────────── */
+
+.hero-clt {
+  // masthead 바로 아래 최상위 블록이므로 100vw 꼼수 없이 전폭이 된다
+  position: relative;
+  width: 100%;
+  isolation: isolate;
+  height: clamp(440px, 78vh, 780px);
+  margin-bottom: 3rem;
+  background: $hero-bg;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.25rem, 3.4vw, 3rem);
+}
+
+.hero-clt__canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+// 하단 readout이 쌓인 막대 위에서도 읽히도록 얇은 스크림
+.hero-clt::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 32%;
+  z-index: 0;
+  pointer-events: none;
+  background: linear-gradient(to top, rgba(14, 15, 17, 0.85), rgba(14, 15, 17, 0));
+}
+
+.hero-clt__marks,
+.hero-clt__stage,
+.hero-clt__readout {
+  position: relative;
+  z-index: 1;
+}
+
+.hero-clt__marks {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: $monospace;
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #8a8f98;
+
+  span:nth-child(2) {
+    display: none;
+
+    @media (min-width: 48rem) {
+      display: block;
+    }
+  }
+}
+
+.hero-clt__stage {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 2rem 0;
+}
+
+.hero-clt__title {
+  margin: 0;
+  width: fit-content;
+  font-weight: 800;
+  font-size: clamp(2.75rem, 9.5vw, 7.5rem);
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  color: #fff;
+  mix-blend-mode: exclusion; // 떨어지는 입자가 글자를 통과한다
+}
+
+.hero-clt__lede {
+  max-width: 34ch;
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.85;
+  letter-spacing: -0.3px;
+  color: #8a8f98;
+}
+
+.hero-clt__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.625rem;
+}
+
+.hero-clt__pill {
+  font-family: $monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 0.7rem 1.35rem;
+  border: 1px solid rgba(242, 242, 239, 0.22);
+  border-radius: 999px;
+  color: #f2f2ef;
+  transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
+
+  &:hover,
+  &:focus-visible {
+    background: #f2f2ef;
+    color: $hero-bg;
+    border-color: #f2f2ef;
+    text-decoration: none;
+  }
+}
+
+/* 시뮬레이션의 실제 상태값 (장식 아님) */
+.hero-clt__readout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 2.25rem;
+  font-family: $monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  color: #8a8f98;
+  border-top: 1px solid rgba(242, 242, 239, 0.16);
+  padding-top: 0.9rem;
+  margin: 0;
+
+  div {
+    padding: 0.15rem 0;
+  }
+
+  dt {
+    display: inline;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+  }
+
+  dd {
+    display: inline;
+    margin: 0 0 0 0.6rem;
+    color: #f2f2ef;
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* 홈에서는 히어로가 제목 역할을 하므로 페이지 타이틀을 시각적으로만 숨긴다 */
+.layout--home .page__title {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-clt__pill {
+    transition: none;
+  }
+}

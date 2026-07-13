@@ -1,6 +1,7 @@
 ---
 layout: home
 permalink: /
-author_profile: true
+author_profile: false
+hero_clt: true
 title: "난수의 데이터로그"
 ---

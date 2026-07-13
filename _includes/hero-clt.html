@@ -1,0 +1,214 @@
+{% comment %}
+  홈 히어로 — 갈톤 보드 시뮬레이션.
+  입자가 매 프레임 좌우로 ±난수 걸음을 하며 떨어져 히스토그램으로 쌓이고,
+  착지한 표본의 평균·표준편차로 매 프레임 다시 계산한 정규곡선이 겹쳐진다.
+  하단 readout(n, x̄, s)은 장식이 아니라 시뮬레이션의 실제 상태값.
+  외부 라이브러리 없음. Canvas 2D + Bayer 4×4 오더드 디더링.
+{% endcomment %}
+
+<section class="hero-clt">
+  <canvas class="hero-clt__canvas" id="hero-sim" aria-hidden="true"></canvas>
+
+  <div class="hero-clt__marks">
+    <span>{{ site.title | default: "난수의 데이터로그" }}</span>
+    <span id="hero-status">STATUS: SAMPLING…</span>
+    <span>SEOUL</span>
+  </div>
+
+  <div class="hero-clt__stage">
+    <h1 class="hero-clt__title">난수의<br />데이터로그</h1>
+    <p class="hero-clt__lede">
+      통계와 인과추론으로 데이터를 읽고, 일하며 배운 것을 기록합니다.
+      화면 위 점들은 지금 이 순간 무작위로 떨어지며 정규분포를 만들고 있습니다.
+    </p>
+    <div class="hero-clt__actions">
+      <a class="hero-clt__pill" href="#recent">글 읽기</a>
+      <a class="hero-clt__pill" href="{{ '/portfolio/' | relative_url }}">포트폴리오</a>
+    </div>
+  </div>
+
+  <dl class="hero-clt__readout">
+    <div><dt>표본 n</dt><dd id="hero-n">0</dd></div>
+    <div><dt>평균 x̄</dt><dd id="hero-mean">—</dd></div>
+    <div><dt>표준편차 s</dt><dd id="hero-sd">—</dd></div>
+  </dl>
+</section>
+
+<script>
+(function () {
+  var canvas = document.getElementById('hero-sim');
+  if (!canvas || !canvas.getContext) return;
+  var ctx = canvas.getContext('2d', { alpha: false });
+
+  var elN = document.getElementById('hero-n');
+  var elMean = document.getElementById('hero-mean');
+  var elSd = document.getElementById('hero-sd');
+  var elStatus = document.getElementById('hero-status');
+
+  var BG = '#0e0f11', DOT = '#e7e8e4', CUR = '#f2f2ef';
+  var CELL = 6;               // 디더 격자 한 칸(px)
+  var BIN_CELLS = 3;          // 히스토그램 막대 폭(칸)
+  var MAX_BAR_FRAC = 0.55;    // 최고 막대가 차지할 높이 비율
+  var TARGET_N = 2600;
+  var FALL_SPEED = 0.7;       // 한 프레임에 내려가는 칸 수 = 걸음 한 번 (작을수록 천천히)
+  var SPAWN_PER_FRAME = 1;    // 프레임당 새 입자 수
+  var BAYER = [[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
+
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var W = 0, H = 0, cols = 0, rows = 0, nBins = 0;
+  var bins, particles, n, sum, sumsq, holdUntil;
+
+  function reset() {
+    bins = new Float64Array(nBins);
+    particles = [];
+    n = 0; sum = 0; sumsq = 0; holdUntil = 0;
+  }
+
+  function sdCells() { return cols * 0.105; }
+
+  // 모든 입자는 바닥까지 같은 횟수만큼 걷는다. 걸음 크기를 이렇게 잡아야
+  // 걸음의 합(≈정규분포)의 표준편차가 목표 σ가 된다.
+  function stepSize() { return sdCells() / Math.sqrt(rows / FALL_SPEED); }
+
+  function resize() {
+    var r = canvas.getBoundingClientRect();
+    W = Math.max(320, r.width);
+    H = Math.max(320, r.height);
+    var dpr = Math.min(window.devicePixelRatio || 1, 2);
+    canvas.width = Math.round(W * dpr);
+    canvas.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    cols = Math.ceil(W / CELL);
+    rows = Math.ceil(H / CELL);
+    nBins = Math.ceil(cols / BIN_CELLS);
+    reset();
+    if (reduced) prefill();
+  }
+
+  function gauss() { // Box–Muller
+    var u = 0, v = 0;
+    while (u === 0) u = Math.random();
+    while (v === 0) v = Math.random();
+    return Math.sqrt(-2 * Math.log(u)) * Math.cos(2 * Math.PI * v);
+  }
+
+  function land(xCell) {
+    var x = Math.min(cols - 0.001, Math.max(0, xCell));
+    bins[Math.floor(x / BIN_CELLS)] += 1;
+    n += 1;
+    var px = x * CELL;
+    sum += px;
+    sumsq += px * px;
+  }
+
+  function prefill() { // 정지 상태 선호 시 수렴한 분포만 그린다
+    for (var i = 0; i < TARGET_N; i++) land(cols / 2 + gauss() * sdCells());
+  }
+
+  function barCells(count, maxCount) {
+    if (maxCount <= 0) return 0;
+    return (count / maxCount) * (rows * MAX_BAR_FRAC);
+  }
+
+  function draw(now) {
+    ctx.fillStyle = BG;
+    ctx.fillRect(0, 0, W, H);
+
+    var maxCount = 0, b, k;
+    for (b = 0; b < nBins; b++) if (bins[b] > maxCount) maxCount = bins[b];
+
+    // 쌓인 히스토그램 — 막대 위쪽 6칸이 디더로 흩어진다
+    ctx.fillStyle = DOT;
+    for (b = 0; b < nBins; b++) {
+      var h = barCells(bins[b], maxCount);
+      if (h <= 0) continue;
+      var top = Math.ceil(h);
+      for (var d = 0; d < top; d++) {
+        var intensity = Math.min(1, (h - d) / 6);
+        var cy = rows - 1 - d;
+        for (k = 0; k < BIN_CELLS; k++) {
+          var cx = b * BIN_CELLS + k;
+          if (cx >= cols) break;
+          if (intensity > BAYER[cy & 3][cx & 3] / 16) {
+            ctx.fillRect(cx * CELL, cy * CELL, CELL - 1, CELL - 1);
+          }
+        }
+      }
+    }
+
+    // 낙하 중인 난수 입자 — 매 프레임 ±step 걸음.
+    // 막대 꼭대기가 아니라 항상 바닥까지 떨어뜨린다. 막대 높이에서 멈추게 하면
+    // 먼저 자란 중앙 막대가 낙하 거리를 줄이고 → 걸음 수가 줄고 → 다시 중앙에
+    // 쌓이는 양의 피드백이 생겨 종 모양 대신 스파이크가 된다.
+    if (!reduced) {
+      var step = stepSize();
+      for (var i = particles.length - 1; i >= 0; i--) {
+        var p = particles[i];
+        p.y += FALL_SPEED;
+        p.x += (Math.random() < 0.5 ? -1 : 1) * step;
+        p.x = Math.min(cols - 0.001, Math.max(0, p.x));
+
+        if (p.y >= rows - 1) {
+          land(p.x);
+          particles.splice(i, 1);
+          continue;
+        }
+        ctx.fillRect(Math.floor(p.x) * CELL, Math.floor(p.y) * CELL, CELL - 1, CELL - 1);
+      }
+    }
+
+    // 표본평균·표본표준편차로 매 프레임 다시 계산하는 정규곡선
+    if (n > 30) {
+      var mean = sum / n;
+      var varr = Math.max(1, sumsq / n - mean * mean);
+      var sd = Math.sqrt(varr);
+      var peak = rows * MAX_BAR_FRAC * CELL;
+
+      ctx.beginPath();
+      for (var px = 0; px <= W; px += 2) {
+        var z = (px - mean) / sd;
+        var y = H - Math.exp(-0.5 * z * z) * peak;
+        if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
+      }
+      ctx.strokeStyle = CUR;
+      ctx.globalAlpha = 0.55;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.globalAlpha = 1;
+
+      var dev = mean - W / 2;
+      elN.textContent = n.toLocaleString('en-US');
+      elMean.textContent = (dev >= 0 ? '+' : '') + dev.toFixed(1) + 'px';
+      elSd.textContent = sd.toFixed(1) + 'px';
+    }
+
+    if (reduced) return;
+
+    if (n < TARGET_N) {
+      for (k = 0; k < SPAWN_PER_FRAME; k++) particles.push({ x: cols / 2, y: 0 });
+      elStatus.textContent = 'STATUS: SAMPLING…';
+    } else if (particles.length === 0) {
+      if (!holdUntil) holdUntil = now + 3200;
+      elStatus.textContent = 'STATUS: CONVERGED';
+      if (now > holdUntil) reset();
+    }
+
+    requestAnimationFrame(draw);
+  }
+
+  if (window.ResizeObserver) {
+    new ResizeObserver(function () { resize(); }).observe(canvas);
+  } else {
+    window.addEventListener('resize', resize);
+  }
+
+  resize();
+  if (reduced) {
+    elStatus.textContent = 'STATUS: CONVERGED';
+    draw(0);
+  } else {
+    requestAnimationFrame(draw);
+  }
+})();
+</script>
