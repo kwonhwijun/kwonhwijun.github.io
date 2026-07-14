@@ -48,15 +48,17 @@
   var BG = '#0e0f11', DOT = '#e7e8e4', CUR = '#f2f2ef';
   var CELL = 6;               // 디더 격자 한 칸(px)
   var BIN_CELLS = 3;          // 히스토그램 막대 폭(칸)
-  var MAX_BAR_FRAC = 0.55;    // 최고 막대가 차지할 높이 비율
-  var TARGET_N = 2600;
+  var MAX_BAR_FRAC = 0.62;    // 최고 막대가 baseline 위 공간에서 차지할 비율
+  var TARGET_N = 1800;
   var FALL_SPEED = 0.7;       // 한 프레임에 내려가는 칸 수 = 걸음 한 번 (작을수록 천천히)
-  var SPAWN_PER_FRAME = 1;    // 프레임당 새 입자 수
+  var SPAWN_PER_FRAME = 2;    // 프레임당 새 입자 수 (많을수록 비처럼 촘촘히 내린다)
+  var HOLD_MS = 1600;         // 수렴 후 유지 시간 → 이후 리셋해 다시 쌓기 시작
+  var BOTTOM_PX = 92;         // 바닥선 아래 여백(px) — 여기에 readout이 놓여 겹치지 않는다
   var BAYER = [[0,8,2,10],[12,4,14,6],[3,11,1,9],[15,7,13,5]];
 
   var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  var W = 0, H = 0, cols = 0, rows = 0, nBins = 0;
+  var W = 0, H = 0, cols = 0, rows = 0, nBins = 0, baseRow = 0;
   var bins, particles, n, sum, sumsq, holdUntil;
 
   function reset() {
@@ -67,9 +69,9 @@
 
   function sdCells() { return cols * 0.105; }
 
-  // 모든 입자는 바닥까지 같은 횟수만큼 걷는다. 걸음 크기를 이렇게 잡아야
+  // 모든 입자는 바닥선까지 같은 횟수만큼 걷는다. 걸음 크기를 이렇게 잡아야
   // 걸음의 합(≈정규분포)의 표준편차가 목표 σ가 된다.
-  function stepSize() { return sdCells() / Math.sqrt(rows / FALL_SPEED); }
+  function stepSize() { return sdCells() / Math.sqrt(baseRow / FALL_SPEED); }
 
   function resize() {
     var r = canvas.getBoundingClientRect();
@@ -81,6 +83,7 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
     cols = Math.ceil(W / CELL);
     rows = Math.ceil(H / CELL);
+    baseRow = rows - Math.ceil(BOTTOM_PX / CELL);   // 히스토그램 바닥선 (readout 위)
     nBins = Math.ceil(cols / BIN_CELLS);
     reset();
     if (reduced) prefill();
@@ -108,7 +111,7 @@
 
   function barCells(count, maxCount) {
     if (maxCount <= 0) return 0;
-    return (count / maxCount) * (rows * MAX_BAR_FRAC);
+    return (count / maxCount) * (baseRow * MAX_BAR_FRAC);
   }
 
   function draw(now) {
@@ -126,7 +129,7 @@
       var top = Math.ceil(h);
       for (var d = 0; d < top; d++) {
         var intensity = Math.min(1, (h - d) / 6);
-        var cy = rows - 1 - d;
+        var cy = baseRow - 1 - d;
         for (k = 0; k < BIN_CELLS; k++) {
           var cx = b * BIN_CELLS + k;
           if (cx >= cols) break;
@@ -149,7 +152,7 @@
         p.x += (Math.random() < 0.5 ? -1 : 1) * step;
         p.x = Math.min(cols - 0.001, Math.max(0, p.x));
 
-        if (p.y >= rows - 1) {
+        if (p.y >= baseRow - 1) {
           land(p.x);
           particles.splice(i, 1);
           continue;
@@ -163,12 +166,13 @@
       var mean = sum / n;
       var varr = Math.max(1, sumsq / n - mean * mean);
       var sd = Math.sqrt(varr);
-      var peak = rows * MAX_BAR_FRAC * CELL;
+      var baseY = baseRow * CELL;
+      var peak = baseRow * MAX_BAR_FRAC * CELL;
 
       ctx.beginPath();
       for (var px = 0; px <= W; px += 2) {
         var z = (px - mean) / sd;
-        var y = H - Math.exp(-0.5 * z * z) * peak;
+        var y = baseY - Math.exp(-0.5 * z * z) * peak;
         if (px === 0) ctx.moveTo(px, y); else ctx.lineTo(px, y);
       }
       ctx.strokeStyle = CUR;
@@ -189,7 +193,7 @@
       for (k = 0; k < SPAWN_PER_FRAME; k++) particles.push({ x: cols / 2, y: 0 });
       elStatus.textContent = 'STATUS: SAMPLING…';
     } else if (particles.length === 0) {
-      if (!holdUntil) holdUntil = now + 3200;
+      if (!holdUntil) holdUntil = now + HOLD_MS;
       elStatus.textContent = 'STATUS: CONVERGED';
       if (now > holdUntil) reset();
     }

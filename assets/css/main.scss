@@ -90,15 +90,15 @@ body {
   display: block;
 }
 
-// 하단 readout이 쌓인 막대 위에서도 읽히도록 얇은 스크림
+// readout이 놓이는 바닥 영역만 살짝 눌러 대비를 준다 (막대는 이 위에서 자란다)
 .hero-clt::after {
   content: "";
   position: absolute;
   inset: auto 0 0 0;
-  height: 32%;
+  height: 96px;
   z-index: 0;
   pointer-events: none;
-  background: linear-gradient(to top, rgba(14, 15, 17, 0.85), rgba(14, 15, 17, 0));
+  background: linear-gradient(to top, rgba(14, 15, 17, 0.92), rgba(14, 15, 17, 0));
 }
 
 .hero-clt__marks,
